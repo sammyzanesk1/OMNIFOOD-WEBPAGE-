@@ -1,0 +1,374 @@
+/* 
+
+---01-TYPOGRAPHY SYSTEM
+
+FONT SIZE SYSTEM (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+
+FONT-WEIGHTS:
+Default:400
+500:medium
+600:semi-bold
+700:bold
+
+LINE-HEIGHTS:
+Default:1
+1.05:small
+1.6:pararap default
+1.2 medium
+1.8 large
+
+
+
+LETTER-SPACING:
+0.75px
+-0.5px
+medium 1.2px
+
+
+---02-COLORS
+
+primary:#e67e22
+tints:
+#fdf2e9;
+#eb984e
+#fae5d2
+shades:
+#cf711f
+#45260a
+accents:
+greys:
+#888
+#767676  lightest grey allowed on #fff
+#555
+color: #6f6f6f;
+#333
+ 
+
+---03 SHADOWS
+box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.75);
+
+---BORDER-RADIUS
+default:9px
+
+
+---WHITESPACE
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+SPACING SYSTEM (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+*/
+
+/***********************/
+/* GENERAL REUSEABLE COMPONENTS */
+/***********************/
+/* styling the text */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /*font-size:10px;  */
+  /* 10px/6px*100%=62.5% */
+  /* percentage of user browser font size setting...this makes default font size scale according to the font size set in the browser..the 
+  numerator changes to the font size set by the user browser */
+  /*.test {
+  background-color: red;
+  padding: 100px;
+  /* width is not responsive while max width is.
+with width if the screen size gets smaller a scrollbar will appear to ensure that the width of the screen is 1000px thus going beyond the normal device viewport
+with max width the max width is set to 1000px of the viewport but if the viewport gets smaller the width will respond and take just the width length required to fit the device screen viewport. there will be no scroll bar and no need for it.
+simle terms here max width is 1000pxfor very large screen and for smaller screens the width will be determined to just fit the screensize automatically. */
+  /* width:1000px */
+  /*  max-width: 1000px;
+    overflow-x: hidden;
+}
+
+
+/* REM and px...by default 16px=1rem.
+always set measurement to rem as different device have different set default px in the html selector which can help automatically adjust the chosen rem.this aids the resposiveness of the browser. 
+for instance if we set font-size to 2rem that is 32px...in a browser with half the scren size we simply set default px to half ie 8px thus for the small device the rem bcoms 1 i.e 16px.
+always set font size to 10px but however do not set font size to pixel rather use percentage by dividing our set font...10/16*100=62.5%
+*/
+  font-size: 62.5%;
+  overflow-x: hidden; /* step 9ii */
+  scroll-behavior: smooth; /* making the scrolling effect slow and nice....but this does not work on safari and microsoft edge so we have to use js */
+}
+
+body {
+  font-family: "rubik", sans-serif;
+  line-height: 1;
+  font-weight: 400;
+  color: #555;
+  /* HIDDEN HERE WILL ONLY WORK IF NO ELEMENT IS POSITIONED ABSOLUTELY IN RELATION TO THE BODY OF THE HTML */
+  overflow-x: hidden; /* step 9ii */
+}
+
+/* creatin a reuseable container dat will be used to center items tru-out d page... */
+.container {
+  /* default width for pages either 1140px or 1200px...rem enables srinkin */
+  max-width: 120rem;
+  /* to center everytin in d container */
+  margin: 0 auto;
+  /* to create space between d section container and d left and rigth edges to avoid d section content stickin to d edges of d page */
+  padding: 0 3.2rem;
+}
+
+.grid {
+  display: grid;
+  column-gap: 6.4rem;
+  row-gap: 9.6rem;
+  /* to create space between two immediate grid containers we use margin-bottom: 9.6rem, this create issue as every grid now has margin bottom
+  but we only need it for section with two immediate grid. so we target all single grids/last child grid and set mrgin bottom to 0.
+  or we do not specify the bottom margin in the grid selector here, thus none of the grid container we have margin bottom...so we just target section/divs with 
+  two immediate grid and set the margin bottom to the value we need... we use  trick by using selector; 
+  THIS IS WHT WE USED.
+METHOD 1....put mb for grid den remove for last grids
+/* 
+margin-bottom: 9.6rem;
+}
+.grid:last-child {
+  margin-bottom: 0;
+}
+*/
+}
+
+/* METHOD 2...just target not last child grids straight and give them mb */
+.grid:not(:last-child) {
+  margin-bottom: 9.6rem;
+}
+
+.grid--2-cols {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--3-cols {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--4-cols {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* .grid--5-cols { 
+  grid-template-columns: repeat(5, 1fr);
+}
+*/
+
+.grid-center-v {
+  align-items: center;
+}
+
+.heading-primary,
+.heading-secondary,
+.heading-tertiary {
+  font-weight: 700;
+  color: #333;
+  /* to make the heading not too big and unnatural reduce the spacing between its letters
+  u use px here as the px is very low and scalling it ownt make much of a difference */
+  letter-spacing: -0.5px;
+}
+
+.heading-primary {
+  line-height: 1.05;
+  font-size: 5.2rem;
+  margin-bottom: 3.2rem;
+}
+
+/* styling the secondary heading using reuseable class selector */
+.heading-secondary {
+  font-size: 4.4rem;
+  line-height: 1.2;
+  margin-bottom: 9.6rem;
+}
+
+.heading-tertiary {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 3.2rem;
+}
+
+.subheading {
+  /* pan is an inline element,u set to block to allow top and bottom fittings */
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #cf711f;
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+  letter-spacing: 0.75px;
+}
+.btn,
+.btn:link,
+.btn:visited {
+  /* to allow padding on top and bottom...links are ordinarilly inline elements-they are side by side  */
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 2rem;
+  padding: 1.6rem 3.2rem;
+  border-radius: 9px;
+
+  /* styling for .btn/sign up btn only */
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  /* transition: background-color 1s; */
+  /* to make the button transit(move slowly) from its state color to another background color when hovered
+  here u have to set transit to the original state class  
+  all(u can use background color in place of all) means transit from link state color to hover state color 1s means transit over a period of 1 second*/
+  transition: all 1s;
+  /* when the button is hovered only its background color transits and not the border, that was a bug, so we set transition to all ie background plus border...always use property transition and value all. */
+}
+/* to make the two button have diff background color, give dem different class then target each with thier style */
+.btn--full:link,
+.btn--full:visited {
+  background-color: #e67e22;
+  color: #fff;
+}
+
+/* setting hover state */
+.btn--full:hover,
+.btn--full:active {
+  background-color: #cf711f;
+}
+
+.btn--outline:link,
+.btn--outline:visited {
+  background-color: #fff;
+  color: #555;
+}
+
+.btn--outline:hover,
+.btn--outline:active {
+  background-color: #fdf2e9;
+
+  /* border: 3px solid white; */
+
+  box-shadow: inset 0 0 0 3px #fff;
+
+  /* we want the background color and botton color to be same when hovered
+   but there should be a demacation which indicates that the button is being hovered
+    we did thid by simply giving the button hover state a white border to demacate the button from the page background 
+    however doing this was just fine but the hero text goes a bit up anytime we hover the botton...
+    to handle this a trick was used by creating a border shadow box and not an actual border */
+
+  /* trick to add border inside
+  inset sets the border inside the button its thickness is 3px its color white no shadows up down left right no opacity */
+}
+
+.btn--form {
+  background-color: #45260a;
+  color: #fdf2e9;
+  /* setting the height of the sign up button
+  we change the btn from stretch default to end thereby reducing the height */
+  align-self: end;
+  /* to set the padding to be same as the select bar so that the height will be uniform */
+  padding: 1.2rem;
+}
+
+.btn--form:hover {
+  background-color: #fff;
+  color: #555;
+}
+
+.link:link,
+.link:visited {
+  /* link is an inline item, to allow bottom padding change it to inline block */
+  display: inline-block;
+  /* to remove the default underline that follows each link, we remove the underline bcos we cannot style it to have some space from the link text so we use bottom border instead*/
+  text-decoration: none;
+  color: #e67e22;
+  /* we gave the link an underline, we used cuurentcolor value as we want the link to always have the color of the link text. always do this if u want both color to be same at all time 
+  this color effect will also apply in the hover state wihtout specifying it. had we used the normal color value we would be required to repeat color and border styling in the hover state below*/
+  border-bottom: 1px solid currentColor;
+  /* create little space between the link and its border ie simplt pushing the content of the link inside from the top
+  do not confuse the link and border to be two different items, never.  */
+  padding-bottom: 2px;
+  transition: all 0.3s;
+}
+
+.link:hover,
+.link:active {
+  color: #cf711f;
+  /* to remove the border bottom */
+  /* border-bottom: none; ....do not use this bcos wen u hover the underline will no longer exist but the page reacts/adjust thereby affecting the visual styling
+  it will adjust move/upwards by one pixel bcos wen u hover u said 1px should be removed from the page content* rather repeat the border function that is in active phase and change the color to transparent or rgba(0,0,0,0)*/
+  border-bottom: 1px solid transparent;
+}
+
+/* LIST REUSEABLE */
+.list {
+  /* to remove the points */
+  list-style: none;
+  /* to create space between list items using gap */
+  display: flex;
+  gap: 1.6rem;
+  flex-direction: column;
+}
+
+/* make the list font size big, note... d li class targets the span element
+targets each li element directly*/
+.list-item {
+  font-size: 1.8rem;
+  /* centering the icon and list elements */
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  line-height: 1.2;
+}
+
+/* styling the list icons */
+.list-icon {
+  width: 3rem;
+  height: 3rem;
+  color: #e67e22;
+}
+
+/* removing the default focus/active tab color */
+*:focus {
+  /* setting default outline to none...u cant clearly see the actve tab */
+  outline: none;
+  /* giving the focus outline our desired style*/
+  /* method 1
+  outline: 4px dotted #e67e22;
+  outline-offset: 8px;
+  this created a squared outline whuch did not fit our rounded buttons 
+  */
+
+  /* method 2...box shadow trick by setting a border inside the element when it is focused on or it is active
+  this way the active border adapts to the shape of each button....check styles.css for cta style*/
+  box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.5);
+}
+/* ************ */
+/* HELPER/SETTINGS SECTION....seconadry stylin to general class styling */
+/* ************ */
+
+/* create space btw the two button elements, u target the full button with a new class(helper class) and use that class specically to create space by using margin. */
+.margin-right-sm {
+  margin-right: 1.6rem !important;
+}
+/* to create space between the 3 column grid and the link button using margin bottom. note the 3 column had a general reuseable class of container so we had to create the new class below to target only it. */
+.margin-botton-md {
+  margin-bottom: 4.8rem !important;
+}
+
+/* to center the meals and 5000+ recipes text
+we could use flex box or simply target the parent element and use text align proerty set to center value or we could have also simply target each of this element and apply text align to them individualy.
+note text align does not work on inline element... the difference with using flexbox is that flexbox will center the text when the screen is full mode the smaller the screen the word will break and all start from the left side of the screen
+do nt use flex box to center words/text*/
+.center-text {
+  /* display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;*/
+  text-align: center;
+}
+
+strong {
+  font-weight: 500;
+}

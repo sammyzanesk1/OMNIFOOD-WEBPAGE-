@@ -1,0 +1,538 @@
+/* MEDIA QUERIES SHOULD CUT ACROSS 200PX each....VERY VERY IMPORTANT */
+
+/* using media query follows a simple logic 
+first u write d desktop version of the html and css code
+then u make it responsive to handheld devices by writing some set of code using media query like the one below
+any handhelp device that falls within the px value set in our media query will apply the code of the media query
+any handheld device with px outside above that set in our media query will apply our desktop code
+same idea applies to wen we reduce the px of our desktop/laptop by reszing its screen
+if we resize the screen to a lower px that falls inside the media query px the laptop browser will apply our 
+media query css code, where we increase or maintain px higher/outside the media query set px, the browser will apply our
+original css code which is meant for desktop.
+THIS IS CALLED THE DESKTOP FIRST APPROACH bcos we set original css and html code with desktop px then adjust it or make it
+responsive to handheld devices through media query codes 
+ this second example below simply says all handheld device with width px up to 1200 should have section hero background color to be orangered 
+once the device viewport exceeds 1200px the background color will be the one set in our original css code*/
+/*
+@media (max-width: 800px) {
+  .section-hero {
+    background-color: greenyellow;
+  }
+}
+/* NOTE: WHERE U HAVE CONFLICTING MEDIA QUERY CODES IT IS THE VALUE OF THE LAST MEDIA QUERY CODE IN THE CSS THAT WILL BE APPLIED IN THE DEVICE BROWSER. 
+CONFLICTING CODE WILL OCCUR WHERE U SET TWO DIFFERENT MEDIA QUERY PX, AND GIVE A PARTICULAR PROPERTY TO BOTH SET PXs AND U GIVE
+THE DIFFERENT PX DIFFERENT VALUE FOR THE SAME PARTICULAR PROPERTY AS DEMONSTRATED BELOW 
+so above we had conflicting background property value, for device with width set to 800px and below the background color will be greenyellow bcos that is the last
+media query, if the media query with max width of 1200px is below it, its background color shall be orangered irrespective of the value set within it as long as there is a conflict
+the browser will apply the value of the last media query*/
+/*
+@media (max-width: 1200px) {
+  .section-hero {
+    background-color: orangered;
+  }
+}
+*/
+
+/* ******************************************************************* */
+/* MEDIA  QUERY CODING SECTION*/
+/* FRESH START HAVING LINKED THE QUERIES CSS TO THE HTML */
+/* NOTE: 1REM=1EM=16PX IN QUERY USE EM NOT REM...TO GET EM DIVIDE THE PX BY 16PX */
+/* SETTING BREAKPOINTS AT 1300PX(1350PX/16PX=84EM ROUNDED FIGURE
+EXACT BREAK POINT IS 84REM*16PX=1344X WHICH IS THE PX OF SMALLER DESKTOP, SO BASICALLY ALL CODES WILL WE WRITE UNDER THIS MEDIA QUERY BREAKPOINT WILL APPLY EXACTLY TO SCREEN SIZES UP TILL 1344PX AFTER WHICH OUR ORIGINAL
+CSS CODE WILL APPLY IF THE SCREEN SIZE EXCEEDS 1344PX  */
+
+/* ******************************** */
+
+/* BELOW 1344PX (SMALLER DESKTOP) 
+/* ******************************** */
+
+/* NOTE THAT WE USE BOTH BREAK POINT AND SCREEN SIZE TO SET THE MEDIA QUERY*/
+
+/* ****************************************************************** */
+
+/* screen size up till 1344px will have hero section width of 120rem just like the other sections of the page
+however the h1 breaks into a new line */
+
+@media (max-width: 84em) {
+  .hero {
+    max-width: 120rem;
+  }
+
+  /*  so we target the h1 and reduce/step down by one class the font size to allow it remain in 3 lines...however at 84em the gallery images sections begins to shrink and gets to much space at its top and bottom...  */
+  .heading-primary {
+    font-size: 4.4rem;
+  }
+
+  /* so we solved the shrinking gallery image by settings its column to two at 84em and below */
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* FONT SIZE SYSTEM (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+SPACING SYSTEM (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+ */
+
+/* ******************************** */
+/* BELOW 1200PX(LANDSCAPE TABLETS) 
+  /* ******************************** */
+/* AT 1200PX (landscape TABLETS....tablets always use very small fonts remember)THE FONTS ARE TOO  BIG WE HAVE TO REDUCE THE FONT-size across the whole page */
+@media (max-width: 75em) {
+  /* we want to reduce the font-size to 9px so 9x/16px*100%=56.25%..so every child element of the html will be reduced so far they are expressed in rem */
+  html {
+    font-size: 56.25%;
+  }
+
+  /* however the h2 h3 are still too big and the grid space is bigger*/
+  .secondary-heading {
+    /* step h2 down...in stepping the headings down we assume 10px remains 1rem, we did not use 9px=1rem as in the html */
+    font-size: 3.6rem;
+  }
+
+  .tertiary-heading {
+    font-size: 2.4rem;
+  }
+
+  .grid {
+    /* we reduce the space between grids by stepping them down
+    remember we used fluid grid system as all our grid containers have the grid class so we can easily apply responsive code to all of them by targeting this class like we just did */
+    column-gap: 4.8rem;
+    row-gap: 6.4rem;
+  }
+  .header {
+    /* we fixed the alignment of the header here making sure it is set to that of the container */
+    padding: 0 3.2rem;
+  }
+
+  /* the gap for the boxes in the hero section was too much, we had to make it same with the gap of the grid boxes */
+  .hero {
+    gap: 4.8rem;
+  }
+
+  /* the nav section occupies so much of the header..i.e it has strechted so we need to reduce its width by lowering the gap of the nav flex container*/
+  .main-nav-list {
+    gap: 3.2rem;
+  }
+
+  /* the testimonial text has become too long as the screen width has now reduced. we need to make the text as short as manageable 
+  so we reduce the padding of the testimonial section now creating space in the sides for the text to grow into and become shorter...
+  i mean not too long/vertical, so i gave side padding to be same as the header and other section this not only made the text fit well but also
+  helped in making the segment alignment same as the rest of the whole page */
+  .testimonials-containers {
+    padding: 9.6rem 3.2rem;
+  }
+}
+
+/* ************************************ */
+/* BELOW 944PX (PORTRAIT TABLETS) */
+/* ************************************ 
+  setting the max-width...940px/16px=58.75em rounded to 59em. 59em*16px=944px */
+
+@media (max-width: 59em) {
+  html {
+    /* font size we want to use is 8px, change to %(8px/16px=0.5*100=50% */
+    font-size: 50%;
+  }
+
+  .hero {
+    grid-template-columns: 1fr; /* the hero section is scramped, no space between the text and image and the header is not nice, we cannot create more space as the width is small already, rather we change the section from being a two column to a single column container like the traditional hero section where u have header text and image line by line(one column) */
+    padding: 0 8rem; /* after we centered the hero section, its h1 and the hero description text was too lenghty, we hd to break them by incresing the padding on both sides so some more words broke to the next line which was fitting */
+    gap: 6.4rem; /* we needed to create more space between the hero image nd the delivered flexbox...since the delivered section is part of the 1st grid item we increased d gap btw imge grid n hero text grid */
+  }
+
+  /* the image now becomes too big for the single column, lets reduce it */
+  .hero-img {
+    width: 60%;
+  }
+
+  /* after making the grid a single column, there was too much space to the right side of the hero section(the hero section was left aligned)
+   we have to now center the content of the hero grid container (the hero text and the hero image -the two 2 grid items).
+   we target the 2 grid items and set their text-align to center. */
+  .hero-text-box,
+  .hero-img-box {
+    text-align: center; /* image is an inline element so text align center will work */
+  }
+
+  /* the deliver meal texts and images  was left aligned so we had to center them to look just like the rest of the hero section, we used justify content bcos it was in a flex box*/
+  .delivered-meals {
+    justify-content: center;
+    margin-top: 3.2rem; /* the space between the delivered meals flexbox and the buttons ontop of it was too far we needed to push d flexbox closer to the hero button here */
+  }
+
+  /* as we reduce the width the logos bcomes shrink bigger in size while the space between the logos become smaller...we had to fix this*/
+  .logos img {
+    height: 2.4rem; /* we made the image smaller  */
+  }
+
+  /* the step numbering in the z pattern section was a little too big compared to the reduced width screen */
+  .step-number {
+    font-size: 7.4rem; /* we reduced the font of the z pattern numbers */
+  }
+
+  /* the meals title(Japanese Gyoza) has breaken into 2 line, we needed to keep it in one line like he othe meal title
+  so we reduced d padding of the meal content flexbox to create more space for content ) */
+  .meal-content {
+    padding: 2.4rem 3.2rem 3.2rem 3.2rem;
+  }
+
+  /* each testimonials text breaks and cover too much length, we need to find a way to shorten the height of each textimonial text*/
+  .section-testimonials {
+    grid-template-columns: 1fr; /* we did this by making the testimonial section a 1 column grid, the text came out perfect but the images were too too */
+  }
+
+  /*   PERFECT...we made the images smaller by making it a 6 column grid, the row was set by css itself */
+  .gallery {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  /* the cta section contents is a bit narrow- the image needs a little more width and the input bar needs more width too. */
+  .cta {
+    grid-template-columns: 3fr 2fr; /* we changed the ratio of the cta section to give the image a little more width from 1/3(33.3%) to 2/5(40%)  */
+  }
+
+  .cta-form {
+    grid-template-columns: 1fr; /* we changed the cta form to a 1 column grid from a 2x2 grid, this gve the input bar enought space to b lengthy but the spacing btw the sign up button n the options bar was too little  */
+  }
+
+  .btn--form {
+    margin-top: 1.2rem;
+  }
+
+  /* ************************************* */
+  /* FOR MOBILE NAVIGATION */
+  /* ************************************* */
+
+  /* steps in creating d whole nav process as taken by Jonas: 
+  1. create nav button element and icons in html giving dem their respective attributes
+  
+  2. style the icons in the css...height,width and color...
+  
+  3. style d nav button...background color, pointer, pointer...hide/turn-off the nav button in the css
+  
+  4. hide the cancel icon in the css...
+  
+  5. turn on the nav button in the query css... 
+  
+  6. style the nav section in the query css( change the nav section from desktop css design to suit our mobile design...1 column)... this steps involves many crucial sub steps viz; 
+    i. take the nav section/main nav out of flow of the header...using absolute positioning in relation to the direct parent element header being position relative..do no forget this step.. 
+    ii.position the out of flow nav section using top, left set to zero
+    iii. make the nav section cover the viewport using width and height property. IT IS CLEARLY VISIBLE HERE
+    iv. mke the nv section texts bigger, center them inside the nav section box and make the nav section a colmunn flexbox with good gap.
+ 
+    7. hide the nav section in the query css, THE NAV SECTION BCOMS INVISIBLE HERE...using either 2 methods viz;
+    a. display method
+    b. opacity technique which involved 3 steps...A,B,C...This method allows animations/transitioning
+ 
+    8. Device mechanism which will enable us show and hide the nav section....
+         WHEN THE MENU ICON IS CLICKED i.e NAV-OPEN IS ACTIVE..
+    i. adding class=nav-open to the header which will be active when ever the nav button is opened/menu icon is clicked/tapped...the js will open n close this class..
+    ii. assume nav-open is active...ie the menu icon is clicked and style the nav section/main nav query css with the ff;
+    a. opacity return to 1 i.e the nav scetion bcoms completely VISIBLE
+    b. pointer-event;auto;
+    c. visibility;visible.
+    d. transition..when the menu icon is clicked/nav-open is active the nav section appears in  transiting manner...remember transition is always set to parent element...what is transiting here are the li items but it is the ul that is set to transition. always remember
+    iii. replacing the menu icon with the cancel icon 
+    e. by setting close-icon display to block...making it visible
+    f. by setting menu-icon display to none...making it invisible
+
+    9. making the nav section slide in nd out of the page from the right side...
+    WHEN THE MENU ICON IS NOT CLICKED i.e NAV-OPEN IS IN DEFAULT/NOT CTIVE.. it involves the following steps to position it outside right of the viewport;
+    i. in the default stage(i.e the nv button is not yet clicked/opened) move the nav section to the right side of the screen using the transform property
+    ii. set general style body and html overflow-x to hidden (universal declarators) to ensure the transformx is completely out of view...ie the page will not allow us scroll right of the view port to view the transformed nav section which will overflow to the right.
+    
+    WHEN THE MENU ICON IS NOW CLICKED i.e NAV-OPEN IS ACTIVE;...the following reverse steps will be done;
+    iii.set nav-open main-nav to transform(0)...this returns the nav section to the viewport
+
+    */
+
+  /* the nav button needs to appear in the query width*/
+  .btn-mobile-nav {
+    display: block; /* we target the nav button and made it visible here, but notice only the menu icon is displyed here as we turned off the cancel icon in the desktop css which still applies here unless we turn it on, 
+    we did this as we wanted only one icon to display at a time and by default it is the menu button just like we have here */
+    z-index: 1000; /* the focus border faintly display when the menu button is clicked, we used z-index to make the border appear untop of the nav button clearly  */
+  }
+
+  /* nav section default phase/stage */
+  .main-nav {
+    background-color: rgba(
+      255,
+      254,
+      254,
+      0.97
+    ); /* to make the nav section partially see through*/
+    /* step 6 */
+    position: absolute; /* relative to parent element..header...if not tranformx will not work..for now we took the nav section out of the flow of the header to enable us turn it into a 1 column flexbox container.*/
+    top: 0; /* position the nv section to top left */
+    backdrop-filter: blur(
+      10px
+    ); /* make the background behind the nav open blur */
+    -webkit-backdrop-filter: blur(5px); /* support for safari */
+    left: 0; /* position the nv section to top left */
+    width: 100%; /* make the nav section cover the view-port(header/hero section) */
+    height: 100vh; /* make the nav section cover the view-port(header/hero section) */
+
+    transform: translateX(
+      100%
+    ); /* step 9i, we moved the nav section to the right side of the screen...out of the viewport . it is invisible here but at the right/x side */
+
+    /* step 6 */
+    display: flex; /*to enable us use justify items and align-items*/
+    align-items: center; /* centering the content of the nav section*/
+    justify-content: center; /* centering the content of the nav section*/
+
+    /* STEP 8 */
+    transition: all 0.5s ease-in; /* step 8d */
+
+    /* STEP 7....HIDING THE NAVIGTION..*/
+    /* display: none; it makes the element simply not exist but allows no transitions at all....METHOD A*/
+
+    /* METHOD B...*/
+
+    opacity: 0; /*Step A.....this makes the white bckground display just invisible/completely seethrough from the eyes however they still exist in the page */
+    pointer-events: none; /* step B make the hidden content inaccessible to mouse and keyboard */
+    visibility: hidden; /* step C make it hidden from screen readers */
+  }
+
+  /* when main nav is open we have to reverse the steps taken to hide the main nav */
+  /* this selector will be used in js, when js opens it main nav opacity bcoms 1 
+  it displays the white background fully, when js closes it, the main nav opacity bcoms zero and the background bcoms fully transparent
+  note js will open it only when the nav buatton is clicked. */
+  .nav-open .main-nav {
+    /* STEP 8 */
+    opacity: 1; /*step 8a, the nav section bcoms nt see tru/ white bckground bcoms completely visible*/
+    pointer-events: auto; /* step 8b, the nav section pointer works  */
+    visibility: visible; /* step 8c, the nav bcoms visible to screen readers  */
+
+    transform: translateX(
+      0
+    ); /* step 9iii flashes the screen from right side to the viewport*/
+  }
+
+  /* step e */
+  .nav-open .icon-mobile-nav[name="close-outline"] {
+    display: block; /* cancel icon bcoms visible */
+  }
+
+  /* step f */
+  .nav-open .icon-mobile-nav[name="menu-outline"] {
+    display: none; /* menu icon bcoms invisible */
+  }
+
+  .main-nav-list {
+    /* step 6 */
+    flex-direction: column; /* to make the nav section list items a column ie appear one after the other...we targeted the parent element here as usual */
+    gap: 4.8rem; /* create space between the flex items in d nav section*/
+  }
+
+  /* step 6 */
+  .main-nav-list:link,
+  .main-nav-list:visited {
+    font-size: 3rem; /* make the nav section text bigger */
+  }
+}
+
+/* ************************************ */
+/* BELOW 700PX (SMALLER TABLETS) */
+/* ************************************ 
+  setting the max-width...700px/16px=43.75em rounded to 44em. 44em*16px=704px */
+
+@media (max-width: 44em) {
+  html {
+    /* font size we want to use is 8px, change to %(8px/16px=0.5*100=50% */
+    font-size: 50%;
+  }
+
+  /* the screen is gettin smller so we arengoing to reduce bigger columns in the page to just two columns */
+  .grid--3-cols,
+  .grid--4-cols {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* this made the meals section nd testimonil seetions  2x2 grid */
+  }
+
+  /* we needed to center the content of the third grid(class=diet) item in the meals section, we made the third grid span from left to right then centered its content, simply we changed it from 2x2 grid more of a first row two column 2nd row one column grid */
+  .diets {
+    grid-column: 1/-1;
+    justify-self: center;
+  }
+
+  /* the space after the h2 has become too much */
+  .secondary-heading {
+    margin-bottom: 4.8rem;
+  }
+
+  /* the pricing plan was too shrinked and looked horrible, we rectified this by returning the cards width to 100% of the container thus giving dm space to expand well */
+  .pricing-plan {
+    width: 100%;
+  }
+
+  /* the footer is in disaray, too shrinked n clustered we had to fix it by truning the grid to 3x2 column, howere we chnged the position of the grid items nd used the spn vlue to stretch the lst two grid cross the 2nd row */
+  .grid-footer {
+    grid-template-columns: repeat(6, 1fr); /* make footer grid 3x2 column */
+  }
+
+  /* ALWYS USE THIS STYLING FOR ASSYMETRIC GRID */
+  .logo-col,
+  .address-col {
+    grid-column: span 3; /* make the last two grid items span cross columns i.e share the space of the last empty grid item eqaully */
+  }
+
+  .nav-col {
+    grid-row: 1; /* move the last 3 grid item to become the first three item in the grid */
+    grid-column: span 2; /* make these items now span across two columns i.e one to the left center empty and two to the right, this will make the 1st row be like the bottom/2nd row and enable the grid container align all 6 items same wy i.e space in the middle of the grid across the two columns/rows  */
+    margin-bottom: 3.2rem;
+    /* creating spce between the two grid items and the bottom grid items, gap was not used so as not to mess up the setting of the grid */
+  }
+}
+
+/* ************************************ */
+/* BELOW 544PX (SMALLER PHONES) */
+/* ************************************ 
+  setting the max-width...550px/16px=34.375em rounded to 34em. 34em*16px=544px */
+
+@media (max-width: 34em) {
+  html {
+    /* font size we want to use is 8px, change to %(8px/16px=0.5*100=50% */
+    font-size: 50%;
+  }
+
+  /* THE SCREEN SIZE IS NOW VERY SMALL AND EVERYTHING WILL HAVE TO BE FIXED IN A SINGLE COLUMN GRID */
+  .grid--2-cols,
+  .grid--3-cols,
+  .grid--4-cols {
+    grid-template-columns: 1fr; /* this makes all grids a 1 column grid */
+  }
+
+  .grid {
+    row-gap: 4.8rem;
+    /* reducing the horizontal space between all grid items */
+  }
+
+  /* we need to make the button big enough for users to easily click them and make dem stay side by side */
+  .btn,
+  .btn:link,
+  .btn:visited {
+    padding: 2.4rem 1.6rem; /* we increased the vertical/top/bottom padding to make the button get more height then reduced the left and right padding to make the buttons shrink/ be together/side by side  */
+  }
+
+  /* the hero section has too much space in and around it */
+  .section-hero {
+    padding: 2.4rem 0 6.4rem 0; /* reduced top and bottom space for d section hero */
+  }
+
+  .hero {
+    padding: 0 3.2rem; /* reduced side space for the hero */
+  }
+
+  /* the hero image aws too small */
+  .hero-img {
+    width: 80%;
+  }
+
+  /* the screen width is too small for the fetured logo we had to reduce the featured logo size*/
+  .logos img {
+    height: 1.2rem; /* we reduced the height of the logos */
+  }
+
+  /* the section how is not properly arrnged bcos the 1 column conversion has altered our former  pattern arrnagement. we need to maintain the image step-no text pattern, so we are going to change the position of the second image and text in the flex container */
+  /* we trget the flex continer we wnted to stlye using the nth child selector */
+  .step-img-box:nth-child(2) {
+    grid-row: 1; /* we targeted the step 1 image then made it occupy first row in the flex container */
+  }
+
+  .step-img-box:nth-child(6) {
+    grid-row: 5; /* we targeted the step 3 image then made it occupy fifth row in the flex container */
+  }
+
+  /* we needed to properly space the step imges...they hd sme spce between the up nd bottom text.... but we cannot use gap selectively for the flex items so we used transform translte trick to fix this selective spacong in the flex container} */
+  .step-img-box {
+    transform: translateY(
+      2.4rem
+    ); /* we moved the images bit down so dat they are closer to their own text tahn the text of the previous step */
+  }
+
+  /* the testimonil text ws too lengthy nd it ws broken...we hd to chnge it into  sinle column grid */
+  .testimonials {
+    grid-template-columns: 1fr; /* text is now short and nice */
+  }
+
+  /* the testimonial gallery now has very small images and the gallery space btw images is too much */
+  .gallery {
+    grid-template-columns: repeat(
+      4,
+      1fr
+    ); /*we changed the gallery grid to  4x3 matrix to make the images bigger */
+    gap: 1.2rem; /* we reduced the spaces between the gallery images */
+  }
+
+  /* the form section is too shrinked  */
+  .cta {
+    grid-template-columns: 1fr; /* we changed the form cta from 2 column to 1 column...the img disappeared bcos its html element is empty so it had no height for the image to display, rememeber the image was created using only css...this did not affect the img prior bcos it was side by side the form text so d form text had height and this height helped d image display*/
+  }
+  .cta-img-box {
+    height: 32rem; /* we defined height to enble the img display */
+    grid-row: 1; /* we made the img come first bfor the cta text */
+  }
+
+  /* the spacing around inside the cta section is too much */
+  .cta-text-box {
+    padding: 3.2rem;
+  }
+}
+
+/* ******************************************** */
+/* fixing safari flexbox gap */
+/* ******************************************** */
+
+.no-flexbox-gap .main-nav-list li:not(:last-child) {
+  margin-right: 4.8rem; /* safari does not support flexbox and its gap, so we have to use margin right to create space between the inline images. wen we do dis we do not style the last element remember. we added d no-flex-gap class to help us use js to implement this styling so js adds this class if the broswer do not support flexbox */
+}
+
+.no-flexbox-gap .list-item:not(:last-child) {
+  margin-bottom: 1.6rem; /* this pplies s the flexbox direction ws colum */
+}
+
+.no-flexbox-gap .list-icon:not(:last-child) {
+  margin-right: 1.6rem;
+}
+
+.no-flexbox-gap .delivered-faces {
+  margin-right: 1.6rem;
+}
+
+.no-flexbox-gap .meal-attribute:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.no-flexbox-gap .meal-icon {
+  margin-right: 1.6rem;
+}
+
+.no-flexbox-gap .footer-row div:not(:last-child) {
+  margin-right: 6.4rem;
+}
+
+.no-flexbox-gap .social-links li:not(:last-child) {
+  margin-right: 2.4rem;
+}
+
+.no-flexbox-gap .footer-nav li:not(:last-child) {
+  margin-bottom: 2.4rem;
+}
+
+@media (max-width: 75em) {
+  .no-flexbox-gap .main-nav-list li:not(:last-child) {
+    margin-right: 3.2rem;
+  }
+}
+
+@media (max-width: 59em) {
+  .no-flexbox-gap .main-nav-list li:not(:last-child) {
+    margin-right: 0;
+    margin-bottom: 4.8rem;
+  }
+}
